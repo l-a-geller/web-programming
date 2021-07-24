@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ace="http://www.icefaces.org/icefaces/components"
+      lang="en">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" href="main.css"/>
+        <title>web3</title>
+    </h:head>
+    <h:body>
+        <div id="background"></div>
+        <h:link styleClass="link" value="TO START PAGE" outcome="start"/>
+        <div id="mainWrapper">
+            <h:panelGroup layout="block" id="svgWrapper">
+                <svg width="450" height="450">
+                    <polygon id="triangle" points="150,225 225,225 225,300"
+                             fill="rgb(252, 252, 252)" fill-opacity="0.5" stroke="rgba(59, 43, 20, 0.7)"/> <!-- треугольник на графике-->
+
+                    <polygon id="rectangle" points="225,225 375,225 375,300, 225,300"
+                             fill="rgb(250, 187, 92)" fill-opacity="0.3" stroke="rgba(59, 43, 20, 0.7)"/> <!-- прямоугольник на графике-->
+
+                    <path id="sector" d="M 300 225 A 75 75, 90, 0, 0, 225 150 L 225 225 Z"
+                          fill="rgb(250, 92, 111)" fill-opacity="0.3" stroke="rgba(59, 43, 20, 0.7)"/> <!-- сектор круга на графике-->
+
+                    <line class="axis" x1="0" x2="450" y1="225" y2="225" stroke="rgb(125, 75, 29)" stroke-width="2"/> <!--оси-->
+                    <line class="axis" x1="225" x2="225" y1="0" y2="450" stroke="rgb(125, 75, 29)" stroke-width="2"/>
+
+                    <polygon points="225,0 219,16 231,16" stroke="rgb(125, 75, 29)" stroke-width="2" fill="rgb(125, 75, 29)"/> <!-- стрелочки для осей-->
+                    <polygon points="450,225 434,231 434,219" stroke="rgb(125, 75, 29)" stroke-width="2" fill="rgb(125, 75, 29)"/>
+
+                    <line class="core-line" x1="300" x2="300" y1="230" y2="220" stroke="rgb(125, 75, 29)" stroke-width="2"/> <!-- шкала деления-->
+                    <line class="core-line" x1="375" x2="375" y1="230" y2="220" stroke="rgb(125, 75, 29)" stroke-width="2"/>
+
+                    <line class="core-line" x1="75" x2="75" y1="230" y2="220" stroke="rgb(125, 75, 29)" stroke-width="2"/>
+                    <line class="core-line" x1="150" x2="150" y1="230" y2="220" stroke="rgb(125, 75, 29)" stroke-width="2"/>
+
+                    <line class="core-line" x1="220" x2="230" y1="150" y2="150" stroke="rgb(125, 75, 29)" stroke-width="2"/>
+                    <line class="core-line" x1="220" x2="230" y1="75" y2="75" stroke="rgb(125, 75, 29)" stroke-width="2"/>
+
+                    <line class="core-line" x1="220" x2="230" y1="300" y2="300" stroke="rgb(125, 75, 29)" stroke-width="2"/>
+                    <line class="core-line" x1="220" x2="230" y1="375" y2="375" stroke="rgb(125, 75, 29)" stroke-width="2"/>
+
+                    <!--подписи к шкале делений-->
+                    <text class="core-text" x="290" y="215">R/2</text>
+                    <text class="core-text" x="370" y="215">R</text>
+
+                    <text class="core-text" x="65" y="215" >-R</text>
+                    <text class="core-text" x="135" y="215">-R/2</text>
+
+                    <text class="core-text" x="235" y="155">R/2</text>
+                    <text class="core-text" x="235" y="80">R</text>
+
+                    <text class="core-text" x="235" y="305">-R/2</text>
+                    <text class="core-text" x="235" y="379">-R</text>
+
+                </svg>
+            </h:panelGroup>
+
+            <h:panelGroup layout="block" id="answer">
+                <p id="textBlock"> </p>
+            </h:panelGroup>
+
+            <h:outputScript library="js" name="main.js"/>
+
+            <h:panelGroup id="formWrapper">
+                <h:form method="post" id="form">
+
+                    <h3>Выберите X:</h3>
+                    <h:panelGroup styleClass="wrapperX">
+                        <ace:sliderEntry value="#{main.x}" styleClass="slider" id="inputX" stepPercent="${100/12}" length="200px" showLabels="false" min="-6" max="6">
+                            <ace:ajax event="slideEnd" execute="@this" render="outX" />
+                        </ace:sliderEntry>
+                        <h:outputText id="outX" styleClass="inputLabel" value="X: #{main.x/2}"/>
+                    </h:panelGroup>
+
+                    <h3>Выберите Y:</h3>
+                    <h:panelGroup id="wrapperY">
+                        <h:inputText value="#{main.y}" styleClass="inputY" id="inputY" required="true" maxlength="9"/>
+                    </h:panelGroup>
+
+                    <h3>Выберите R:</h3>
+                    <h:panelGroup id="wrapperR">
+                        <ace:sliderEntry id="R" value="#{main.r}" styleClass="slider" stepPercent="${100/6}" length="200px" showLabels="false" min="2" max="8" onSlideEnd="checkR()" >
+                            <ace:ajax event="slide" render="outR" execute="R" />
+                        </ace:sliderEntry>
+                        <h:outputText id="outR" styleClass="inputLabel" value="R: #{main.r/2}"/>
+
+                    </h:panelGroup>
+
+                    <h:panelGroup layout="block" styleClass="sendClearWrapper">
+                        <h:commandButton id="refresh_table" class="commandButtons" value="Отправить" onclick="createPoint()" action="#{main.addPoint}"/>
+                        <h:commandButton id="clearPoints" class="commandButtons" value="Очистить" action="#{main.clearTable}">
+                            <ace:ajax event="click" execute="@this" render="table" />
+                        </h:commandButton>
+                    </h:panelGroup>
+
+                </h:form>
+
+                <h:form method="post" id="svgForm">
+
+                    <h:panelGroup style="display: none" id="wrapperXt">
+                        <h:inputText value="#{main.svgX}" styleClass="inputY" id="inputXHidden" required="true">
+                            <ace:ajax event="click" render="outXh" execute="inputXHidden" />
+                        </h:inputText>
+                        <h:outputText id="outXh" value="X: #{main.svgX}"/>
+                    </h:panelGroup>
+
+                    <h:panelGroup style="display: none" id="wrapperYt">
+                        <h:inputText value="#{main.svgY}" styleClass="inputY" id="inputYHidden" required="true">
+                            <ace:ajax event="click" render="outY" execute="inputYHidden" />
+                        </h:inputText>
+                        <h:outputText id="outY" value="Y: #{main.svgY}"/>
+                    </h:panelGroup>
+
+                    <h:panelGroup style="display: none" layout="block" styleClass="sendClearWrapper">
+                        <h:commandButton id="hidden_refresh_table" class="commandButtons" value="Отправить" action="#{main.addSVGPoint}">
+                            <ace:ajax event="click" render="table" execute="@this" />
+                        </h:commandButton>
+                        <h:button class="commandButtons" value="Очистить"/>
+                    </h:panelGroup>
+
+                </h:form>
+
+            </h:panelGroup>>
+        </div>
+
+
+        <h:panelGroup id="table" styleClass="tableWrapper">
+
+            <h:dataTable style="color: rgb(177, 227, 221); border-collapse: collapse; font-family: Comic Sans MS;" value="#{main.points}" var="point">
+                <h:column>
+                    <f:facet name="header" >ID</f:facet>
+                    #{point.id}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">X</f:facet>
+                    #{point.x}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Y</f:facet>
+                    #{point.y}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">R</f:facet>
+                    #{point.r}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Check result</f:facet>
+                    #{point.res}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Request time</f:facet>
+                    #{point.requestTime}
+                </h:column>
+            </h:dataTable>
+
+        </h:panelGroup>
+
+        <div id="nav"></div>
+
+    </h:body>
+
+</html>

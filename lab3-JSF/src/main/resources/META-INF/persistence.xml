@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+
+    <persistence-unit name="p">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <class>Point</class>
+        <properties>
+
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/web3" />
+            <property name="javax.persistence.jdbc.user" value="user" />
+            <property name="javax.persistence.jdbc.password" value="password" />
+
+            <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+            <property name="eclipselink.create-ddl-jdbc-file-name" value="create.jdbc"/>
+            <property name="eclipselink.drop-ddl-jdbc-file-name" value="drop.jdbc"/>
+            <property name="eclipselink.ddl-generation.output-mode" value="both"/>
+
+        </properties>
+    </persistence-unit>
+</persistence>

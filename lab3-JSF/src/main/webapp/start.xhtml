@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="ru" xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="start.css"/>
+    <title>Времечко</title>
+</h:head>
+<h:body>
+    <header><span>Блинова Маргарита, Геллер Леонид (=^･ｪ･^=)</span><span>P3230, Вариант: 2655</span></header>
+
+    <div id="clockWrapper">
+        <div class="timeSheet"><p>1</p></div>
+        <div class="timeSheet"><p>2</p></div>
+        <div class="colon">
+            <div></div>
+            <div></div>
+        </div>
+        <div class="timeSheet"><p>3</p></div>
+        <div class="timeSheet"><p>4</p></div>
+        <div class="colon">
+            <div></div>
+            <div></div>
+        </div>
+        <div class="timeSheet"><p>5</p></div>
+        <div class="timeSheet"><p>6</p></div>
+    </div>
+    <div id="dateWrapper">
+        <p id="date"/>
+    </div>
+
+    <div id="linkWrapper">
+        <img src="img/kotik.png" alt="Тут долен был быть кот"/>
+        <h:link styleClass="link" value="TO MAIN PAGE" outcome="main"/>
+        <img class="mirrorX" src="img/kotik.png" alt="Тут долен был быть второй кот"/>
+    </div>
+
+</h:body>
+
+
+<h:outputScript library="js" name="start.js"/>
+
+</html>

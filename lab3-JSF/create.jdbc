@@ -1,0 +1,10 @@
+CREATE SEQUENCE id_seq;
+
+CREATE TABLE points (
+    id INTEGER NOT NULL DEFAULT nextval('id_seq'::regclass),
+    x DOUBLE PRECISION NOT NULL,
+    y DOUBLE PRECISION NOT NULL,
+    r REAL NOT NULL,
+    result BOOLEAN NOT NULL,
+    PRIMARY KEY (id)
+);

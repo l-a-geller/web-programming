@@ -1,0 +1,191 @@
+body{
+    background: url("img/fon5.jpg");
+    background-size: cover;
+}
+
+header {
+    position: absolute;
+    left: 0; top: 0;
+    width: 100%;
+    background: linear-gradient(to bottom right, #b89f79, #3b2b14);
+    height: 8vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+header span {
+    color: #f0e8dd;
+    font-family: "Comic Sans MS";
+    font-size: 1.5em;
+    margin: 15px;
+}
+
+#linkWrapper{
+    position: relative;
+    width: 80vw;
+    left: 10vw;
+    top: 52vh;
+    margin-left: -10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#linkWrapper img{
+    position: relative;
+    width: 16vw;
+}
+
+.mirrorX{
+    transform: scale(-1, 1);
+}
+
+#kotik {
+    position: relative;
+    width: 16vw;
+    top: 57vh;
+    right: 1vh;
+}
+
+#clockWrapper {
+    position: absolute;
+    left: 50vw;
+    top: 35vh;
+    margin-left: -40vw;
+    margin-top: -175px;
+    width: 80vw;
+    height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.timeSheet{
+    position: relative;
+    width: 11.5vw;
+    height: 22vw;
+    background: linear-gradient(to bottom right, white, #b89f79);
+    border-radius: 3vw;
+}
+.timeSheet::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    bottom: -2px;
+    left: -2px;
+    right: -2px;
+    background: linear-gradient(to top left, #b89f79, white);
+    border-radius: 34px;
+    z-index: -1;
+}
+.colon{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: transparent;
+    width: 3vw;
+}
+.colon div{
+    width: 2vw;
+    height: 2vw;
+    border-radius: 2vw;
+    background-color: #3b2b14;
+    margin: 3vw;
+}
+.timeSheet p{
+    osition: absolute;
+    margin: 0;
+    margin-left: 1vw;
+    top: -1vw;
+    /* transform: translate(0, -162px); */
+    font-size: 17vw;
+    color: #3b2b14;
+    font-family: "Comic Sans MS"
+}
+
+.rotating {
+    animation: 2.1s rotate;
+    transform-origin: 0 0;
+}
+.rotateBack{
+    animation: 2.1s rotateBack;
+    transform-origin: 0 0;
+}
+@keyframes rotate {
+    0% {
+        transform:rotateX(0deg);
+    }
+    100% {
+        transform:rotateX(90deg);
+    }
+}
+@keyframes rotateBack {
+    0% {
+        transform:rotateX(90deg);
+    }
+    100% {
+        transform:rotateX(0deg);
+    }
+}
+#dateWrapper {
+    background: linear-gradient(to bottom right, #f0e8dd, #b89f79);
+    width: 450px;
+    height: 80px;
+    position: relative;
+    left: 50vw;
+    margin-left: -235px;
+    top: 60vh;
+    border-radius: 7px;
+}
+#dateWrapper p{
+    color: rgba(59, 43, 20, 0.7);
+    font-family: "Comic Sans MS";
+    font-size: 3.2em;
+    text-align: center;
+}
+
+.link{
+    font-family: "Comic Sans MS";
+    color: #3b2b14;
+    text-decoration: none;
+    text-align: center;
+}
+.link:hover{
+    text-decoration: underline;
+}
+
+@media screen and (max-width: 900px) {
+    header span {
+        font-size: 1.2em;
+    }
+    #dateWrapper{
+        top: 50vh;
+    }
+}
+@media screen and (max-width: 700px) {
+    header span {
+        font-size: 0.7em;
+    }
+    #dateWrapper{
+        top: 50vh;
+        width: 70vw;
+        height: 9vw;
+        margin-left: -35vw;
+        font-size: 1.9vw;
+    }
+}
+
+@media screen and (max-height: 600px) {
+    header {
+        height: 40px;
+    }
+    #clockWrapper{
+        top: 200px;
+    }
+    #dateWrapper{
+        top: 300px;
+    }
+    #linkWrapper{
+        top: 350px;
+    }
+}

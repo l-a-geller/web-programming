@@ -1,0 +1,292 @@
+body {
+  background-color: black;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+header {
+  position: absolute;
+  left: 0; top: 0;
+  width: 100%;
+  background-color: #22877b;
+  height: 8vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+header span {
+  color: #b1e3dd;
+  font-family: "Comic Sans MS";
+  font-size: 1.3em;
+  margin: 15px;
+}
+#mainWrapper {
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 92vh;
+  top: 8vh;
+}
+#svgWrapper {
+  position: relative;
+  background-color: rgba(26, 66, 62, 0.5);
+  height: 500px;
+  width: 475px;
+  border-radius: 15px;
+}
+#svgWrapper svg {
+  position: relative;
+  left: 12.5px;
+  top: 25px;
+}
+#answer {
+  position: relative;
+  background-image: url(img/anime.png);
+  background-size: contain;
+  height: 500px;
+  width: 400px;
+}
+#textCloudWrapper {
+  position: relative;
+  left: 177px;
+  top: 15px;
+  width: 184px;
+  height: 130px;
+  background-color: transparent;
+}
+#textCloud {
+  color: rgb(26, 66, 62);
+  font-family: "Comic Sans MS";
+  text-align: center;
+  vertical-align: center;
+  z-index: 1;
+  font-size: 80%;
+}
+#answerAnime {
+  position: relative;
+  left: 10px;
+  width: 400px;
+}
+.erotic {
+  position: relative;
+  border-radius: 30px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  z-index: 10;
+}
+#titsControl {
+  top: 87px;
+  left: 70px;
+  width: 40px;
+  height: 42px;
+}
+#leftJopaControl {
+  top: 212px;
+  left: -113px;
+  width: 78px;
+  height: 104px;
+}
+#rightJopaControl {
+  top: 228px;
+  left: -153px;
+  width: 73px;
+  height: 100px;
+}
+#tyankaHead {
+  top: 7px;
+  left: 102px;
+  width: 144px;
+  height: 100px;
+}
+#formWrapper {
+  position: relative;
+  display: flex;
+  width: 300px;
+  background-color: rgba(26, 66, 62, 0.5);
+  height: 415px;
+  border-radius: 15px;
+  border: 4px solid rgba(177, 227, 221, 0.6) ;
+}
+.core-text {
+  fill: rgb(177, 227, 221);
+  font-family: "Comic Sans MS";
+}
+#wrapperX {
+  position: relative;
+  width: 260px;
+  height: 160px;
+  left: 20px;
+  border-radius: 15px;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+}
+#wrapperX label {
+  position: relative;
+  font-family: "Comic Sans MS";
+  color: rgb(177, 227, 221);
+  font-size: 1.1em;
+  height: 50px;
+}
+input[type=checkbox] {
+  position: relative;
+  display: none;
+}
+input[type=radio] {
+  visibility: hidden;
+}
+label:not(.radio):before {
+  position: relative;
+  top: 10px;
+  content: "";
+  display: inline-block;
+  margin: 5px;
+  width: 22px;
+  height: 22px;
+  border: 3.5px solid rgb(177, 227, 221);
+  border-radius: 20px;
+}
+input[type=checkbox]:checked + label {
+  position: relative;
+  top: 11px;
+}
+input[type=checkbox]:checked + label:before {
+  content: "\2713";
+  font-weight: bold;
+  text-align: center;
+  position: relative;
+  top: -1px;
+}
+.xMinus:before {
+  margin-left: 15px;
+}
+#formWrapper h3 {
+  width: 300px;
+  text-align: center;
+  font-family: "Comic Sans MS";
+  color: rgb(177, 227, 221);
+}
+#wrapperY {
+  position: relative;
+  margin-top: 20px;
+  left: 20px;
+  width: 260px;
+}
+#wrapperY input {
+  width: 247px;
+  height: 30px;
+  border-radius: 7px;
+  border: 3px solid rgb(177, 227, 221);
+  background-color: rgb(26, 66, 62);
+  color: rgb(177, 227, 221);
+  font-family: "Comic Sans MS";
+  font-size: 1.1em;
+  font-weight: 800;
+  outline: none;
+}
+#wrapperY input::placeholder {
+  font-family: "Comic Sans MS";
+  color: rgb(177, 227, 221);
+}
+#wrapperR {
+  position: relative;
+  width: 270px;
+  left: 15px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+#wrapperR label {
+  color: rgb(177, 227, 221);
+  position: relative;
+  left: -12px;
+  top: 20px;
+  font-family: "Comic Sans MS";
+  font-size: 0.9em;
+}
+#sendClearWrapper {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+#sendClearWrapper button {
+  position: relative;
+  top: 30px;
+  height: 36px;
+  width: 120px;
+  background-color: rgb(26, 66, 62);
+  border-radius: 7px;
+  border: 4px solid rgba(177, 227, 221, 0.6);
+  font-family: "Comic Sans MS";
+  font-size: 1.1em;
+  color: rgb(177, 227, 221);
+  outline: none;
+}
+#sendClearWrapper button:hover {
+  background-color: rgb(177, 227, 221);
+  color: rgb(26, 66, 62);
+}
+input[type='radio']:before {
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  top: -8px;
+  left: 10px;
+  position: relative;
+  background-color: transparent;
+  content: '';
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid rgb(177, 227, 221);
+}
+input[type='radio']:checked:before {
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  left: 10px;
+  position: relative;
+  content: '\2022';
+  color: rgb(177, 227, 221);
+  font-size: 3em;
+  line-height: 16px;
+  text-align: center;
+  vertical-align: center;
+  display: inline-block;
+  visibility: visible;
+}
+table {
+  position: absolute;
+  top: 100vh;
+  color: rgb(177, 227, 221);
+  border-collapse: collapse;
+  font-family: "Comic Sans MS";
+}
+table th,td {
+  border: 3px solid rgb(177, 227, 221);
+  width: 16vw;
+  height: 7vh;
+  text-align: center;
+}
+table tr:nth-child(even) {
+  background-color: rgba(138, 202, 207, 0.3);
+}
+table td {
+  border: none;
+}
+table th {
+  background-color: rgba(138, 202, 207, 0.3);
+}
+
+@media (max-width: 1200px) {
+  header {
+    font-size: 60%;
+  }
+  #mainWrapper {
+    flex-direction: column;
+    height: fit-content;
+  }
+  table {
+    top: 1540px;
+  }
+}

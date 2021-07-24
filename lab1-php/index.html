@@ -1,0 +1,237 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Web 1</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+    <header>
+        <span> Made By: Leonid Geller (P3230) </span>
+        <span> Variant: 2608 </span>
+    </header>
+
+    <h2 class="fadeIn">WELCOME TO AREA STRIKE HANDLER</h2>
+
+    <div id="wrapper">
+        <svg width="300" height="300">
+
+            <!--            Линии оси             -->
+
+            <line class="axis" x1="0" x2="300" y1="150" y2="150" stroke="white"></line>
+            <line class="axis" x1="150" x2="150" y1="0" y2="300" stroke="white"></line>
+            <polygon points="150,0 144,15 156,15" stroke="white"></polygon>
+            <polygon points="300,150 285,156 285,144" stroke="white"></polygon>
+
+            <line class="coor-line" x1="200" x2="200" y1="155" y2="145" stroke="white"></line>
+            <line class="coor-line" x1="250" x2="250" y1="155" y2="145" stroke="white"></line>
+
+            <line class="coor-line" x1="50"  x2="50"  y1="155" y2="145" stroke="white"></line>
+            <line class="coor-line" x1="100" x2="100" y1="155" y2="145" stroke="white"></line>
+
+            <line class="coor-line" x1="145" x2="155" y1="100" y2="100" stroke="white"></line>
+            <line class="coor-line" x1="145" x2="155" y1="50"  y2="50"  stroke="white"></line>
+
+            <line class="coor-line" x1="145" x2="155" y1="200" y2="200" stroke="white"></line>
+            <line class="coor-line" x1="145" x2="155" y1="250" y2="250" stroke="white"></line>
+
+            <text class="coor-text" x="195" y="140">R/2</text>
+            <text class="coor-text" x="248" y="140">R</text>
+
+            <text class="coor-text" x="40" y="140" >-R</text>
+            <text class="coor-text" x="90" y="140">-R/2</text>
+
+            <text class="coor-text" x="160" y="105">R/2</text>
+            <text class="coor-text" x="160" y="55">R</text>
+
+            <text class="coor-text" x="160" y="205">-R/2</text>
+            <text class="coor-text" x="160" y="255">-R</text>
+
+            <!-- first figure-->
+            <polygon class="svg-figure rectangle-figure" points="150,250 150,150 250,150, 250,250"
+                     fill="blue" fill-opacity="0.3" stroke="blue"></polygon>
+
+            <!-- second figure circle-->
+            <path  class="svg-figure circle-figure" d="M 50 150 A 100 100, 90, 0, 0, 150 250 L 150 150 Z"
+                   fill="green" fill-opacity="0.3" stroke="green"></path>
+            <path  class="svg-figure circle-figure" d="M 50 150 A 100 100, 90, 0, 0, 150 250 L 150 150 Z"
+                   fill="green" fill-opacity="0.3" stroke="green"></path>
+
+            <!-- third figure-->
+            <polygon class="svg-figure triangle-figure" points="200,150 150,150 150,100"
+                     fill="yellow" fill-opacity="0.3" stroke="yellow"></polygon>
+
+            <circle r="3" cx="150" cy="150" id="target-dot"></circle>
+
+        </svg>
+        <div class="commandPanel">
+            <h4>Choose R:</h4>
+            <progress max="100" value="50" id="progress"></progress>
+            <div class = "pLines">
+                <div class="progressLine"></div>
+                <div class="progressLine"></div>
+                <div class="progressLine"></div>
+            </div>
+            <div class="progressNames">
+                <div>1</div>
+                <div>1.5</div>
+                <div>2</div>
+                <div>2.5</div>
+                <div>3</div>
+            </div>
+
+            <form id="form" action="index.html" method="post" oninput="return validate()" onsubmit="return validate()">
+                <input type="text" id="xCoord" placeholder="X"/>
+                <br>
+                <input type="text" id="yCoord" placeholder="Y"/>
+                <br>
+                <button onclick="validate()">Check</button>
+                <button type="submit" onclick="sc()" id="send" disabled>Send</button>
+                <button id="clear">Очистить</button>
+            </form>
+
+        </div>
+        <div id="correct">
+            <h4 id="ans">Please enter X and Y into the form</h4>
+        </div>
+    </div>
+
+    <div id="dark">
+        <table id="tab" cellspacing="0">
+            <tr>
+                <th>X</th>
+                <th>Y</th>
+                <th>Radius</th>
+                <th>Result</th>
+                <th>Time</th>
+                <th>Done in</th>
+            </tr>
+            <tbody id="tbody">
+
+            </tbody>
+        </table>
+    </div>
+
+
+    <script>
+
+        let progressBar = document.getElementById("progress");
+        const sender = document.getElementById("send");
+
+        progressBar.addEventListener('click', function(event){
+            if (event.offsetX <= 25)  progressBar.value = 0;
+            else if (event.offsetX <= 75)  progressBar.value = 25;
+            else if (event.offsetX <= 125)  progressBar.value = 50;
+            else if (event.offsetX <= 175)  progressBar.value = 75;
+            else progressBar.value = 100;
+        }, false);
+
+        function validate() {
+            const x = document.getElementById("xCoord");
+            const y = document.getElementById("yCoord");
+            const r = document.getElementById("progress");
+            const dot = document.getElementById("target-dot");
+            const answer = document.getElementById("correct");
+            const ans = document.getElementById("ans");
+
+            x.style.background = "transparent";
+            y.style.background = "transparent";
+            answer.style.background = "rgba(116, 17, 245, 0.1)";
+            sender.disabled = true;
+            ans.innerText = "";
+            dot.visible =  false;
+            dot.style = "cx: 150";
+
+            if (!x.value){
+                x.style.backgroundColor = "rgba(116, 17, 245, 0.35)";
+                answer.style.background = "rgba(255, 0, 0, 0.25)";
+                sender.disabled = true;
+                ans.innerText = "X not Provided";
+                dot.visible =  false;
+                dot.style = "cx: 150; visibility: hidden;";
+                return false;
+            }
+
+            if (!y.value){
+                y.style.background = "rgba(116, 17, 245, 0.35)";
+                answer.style.background = "rgba(255, 0, 0, 0.25)";
+                sender.disabled = true;
+                ans.innerText = "Y not Provided";
+                dot.style = "r: 0;"
+                dot.visible =  false;
+                dot.style = "cx: 150; visibility: hidden;";
+                return false;
+            }
+
+            const radius = Number(r.value/50 +1);
+            const xVal = Number(x.value);
+            const yVal = Number(y.value);
+
+            if ( !isFinite(xVal) || (xVal <= -3) || (xVal >= 3) ){
+                ans.innerText = "X must be a number in (-3 ; 3)";
+                dot.visible =  false;
+                dot.style = "cx: 150; visibility: hidden;";
+                return false;
+            }
+            if( (!isFinite(yVal)) || (yVal <= -3) || (yVal >= 5) ) {
+                ans.innerText = "Y must be a number in (-3 ; 5)";
+                dot.style = "r: 0;";
+                dot.style = "cx: 150; visibility: hidden;";
+                return false;
+            }
+
+            if (!( (yVal >= -radius && xVal <= radius && xVal >= 0 && yVal <= 0) || (yVal <= -xVal + radius/2 && xVal >= 0 && yVal >= 0) || ((xVal * xVal + yVal * yVal) <= radius * radius && xVal <= 0 && yVal <= 0) )) {
+                answer.style.background = "rgba(255, 0, 0, 0.25)";
+                ans.innerText = "Input is valid, point does not hit the figure";
+                sender.disabled = false;
+                dot.style = "r: 3;";
+                dot.visible =  true;
+                dot.style = "cx: " + ((xVal*100)/radius + 150) + "; " +
+                    "cy: " + (-(yVal*100)/radius + 150) + "; " +
+                    "visibility: visible";
+                return false;
+            }
+
+            sender.disabled = false;
+            answer.style.background = "rgba(0, 255, 0, 0.25)";
+            ans.innerText = "Data is valid, point hits the figure";
+            dot.style = "r: 3;";
+            dot.visible =  true;
+            dot.style = "cx: " + ((xVal*100)/radius + 150) + "; " +
+                "cy: " + (150 - (yVal*100)/radius) + "; " +
+                "visibility: visible";
+            return false;
+        }
+
+        sender.onclick = (ev) => {
+            ev.preventDefault();
+
+            var inpX = document.getElementById("xCoord");
+            var inpY = document.getElementById("yCoord");
+            var rad = document.getElementById("progress");
+
+            var post = [inpX.value, inpY.value, rad.value/50 + 1];
+
+            fetch('test.php', {
+                method: 'POST',
+                body: JSON.stringify(post),
+            })
+            .then( response => response.text() )
+            .then((data) =>  document.getElementById("tbody").innerHTML = data)
+
+        };
+
+        document.getElementById("clear").onclick = (ev) => {
+            ev.preventDefault();
+
+            fetch('clear.php', {
+                method: 'POST',
+            });
+
+            document.getElementById("tbody").innerHTML = "";
+        };
+
+    </script>
+
+</body>
